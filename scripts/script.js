@@ -2,6 +2,8 @@ const input = document.querySelector(".input-search");
 const form = document.querySelector("form");
 const data = new CountryData();
 const display = document.querySelector(".display");
+const row = document.createElement('div')
+row.classList.add('row')
 
 const updateUi = (data) => {
   const { countryDetail } = data;
@@ -38,21 +40,19 @@ const updateUi = (data) => {
           <P><span class='bold-text'>Currencies: </span>${countryDetail.currencies.map(
             (currency) => currency.code
           )}</P>
-          <P><span class='bold-text'>Languages:${countryDetail.languages.map(
+          <P><span class='bold-text'>Languages:</span>${countryDetail.languages.map(
             (language) => language.name
-          )} </span></P>
+          )} </P>
         </div>
         <div class='col-12 lg-col-12 content-three'>
-          <p><span class='bold-text'>Border Countries: </span><span class='border'>Border nav3 </span></p>
+         <p><span class='bold-text'>Border Countries: </span>${
+           countryDetail.borders
+         }</p>
+          </div>
         </div>
       </div>
-
     </div>
   </div>
-
-
-</div>
-
 </div>
 
 `;
@@ -66,8 +66,35 @@ form.addEventListener("submit", (e) => {
   data
     .updateCountry(country)
     .then((data) => {
-      updateUi(data);
+        updateUi(data);
+        
     })
 
     .catch((err) => console.log(err));
 });
+
+data.getAllCData()
+.then(data=>{data.forEach(country=>{
+  updatehomepage(country)
+  })
+  .catch((err) => console.log(err));
+})
+const updatehomepage=(country)=>{
+  const home= document.createElement('div')
+  let classToAdd = ['col-12','sm-col-12','md-col-12','lg-col-3','card']
+  home.classList.add(...classToAdd)
+  const imgSrc = `${country.flag}`
+  home.innerHTML= `
+    <img src=${imgSrc}>
+    
+    <p><span class="bold-text">Population: </span>${country.population} </p>
+    <p><span class="bold-text">Region: </span>${country.region}</p>
+    <p><span class="bold-text">Capital: </span>${country.capital}</p>
+    `
+  display.append(row)
+  row.append(home)
+}
+
+
+
+

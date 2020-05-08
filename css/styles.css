@@ -26,6 +26,7 @@ body {
 img {
   max-width: 100%;
   border: solid 1px black;
+  box-shadow: 0px 1px 9px gray;
 }
 
 .display {
@@ -37,4 +38,7 @@ img {
 }
 .bold-text {
   font-weight: bolder;
+}
+.input-box,.select-box{
+  box-shadow: 0px 1px 9px gray;
 }
