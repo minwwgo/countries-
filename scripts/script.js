@@ -6,24 +6,31 @@ const row = document.createElement("div");
 row.classList.add("row");
 const selectBox = document.querySelector(".select-box");
 
-const change = document.querySelector('.change-body')
-  change.addEventListener('click',()=>{
-   document.body.classList.toggle('dark-body')
-   document.querySelector('.header').classList.toggle('dark-body')
-   document.querySelector('.header h2').classList.toggle('dark-body')
-   document.querySelector('.header p').classList.toggle('dark-body')
-   document.querySelector('').classList.toggle('hide')
-
-})
-
+const change = document.querySelector(".change-body");
+change.addEventListener("click", () => {
+  document.body.classList.toggle("dark-body");
+  document.querySelector(".header").classList.toggle("dark-body");
+  document.querySelector(".header h2").classList.toggle("dark-body");
+  document.querySelector(".header p").classList.toggle("dark-body");
+  // /document.querySelector("").classList.toggle("hide");
+  const para = document.querySelector('.header p .mode-change')
+  if(para.innerHTML.includes('Dark')){
+    para.innerText= "Light Mode"
+  }else{
+    para.innerText= "Dark Mode"
+  }
+  
+});
 
 const updateUi = (data) => {
   const { countryDetail } = data;
 
   const imgSrc = `${countryDetail.flag}`;
 
-  display.innerHTML = `<div class="row">
-<div class='b-card'>
+  display.innerHTML = `
+  
+  <div class="row">
+  <div class='b-card'>
   <div class="row">
     <div class='lg-col-6 image'>
       <img src=${imgSrc} alt="">
@@ -85,21 +92,25 @@ form.addEventListener("submit", (e) => {
 });
 
 data.getAllCData().then((data) => {
-  updateHome(data)
-  
-  });
+  updateHome(data);
+});
 const updateHome = (countries) => {
-  countries.map(country=>{
-   displayCountry(country)
-  })
+  countries.map((country) => {
+    displayCountry(country);
+  });
 };
-const displayCountry=(country)=>{
+const displayCountry = (country) => {
   const home = document.createElement("div");
-  let classToAdd = ["col-12", "sm-col-12", "md-col-12", "lg-col-3",'xl-col-3','home'];
+  let classToAdd = [
+    "col-12",
+    "sm-col-12",
+    "md-col-12",
+    "lg-col-3",
+    "xl-col-3",
+    "home",
+  ];
   home.classList.add(...classToAdd);
-  
-  
-  
+
   const imgSrc = `${country.flag}`;
   home.innerHTML = `
     <div class="card">
@@ -116,48 +127,29 @@ const displayCountry=(country)=>{
     </div>
     
     `;
-    display.append(row);
-    row.appendChild(home);
-    home.addEventListener('click', ()=>{
-      console.log(country.name)
-      const dataCo = country.name.toLowerCase()
-      console.log(dataCo)
-      data
-    .updateCountry(dataCo)
-    .then((data) => {
+  display.append(row);
+  row.appendChild(home);
+  home.addEventListener("click", () => {
+    console.log(country.name);
+    const dataCo = country.name.toLowerCase();
+    console.log(dataCo);
+    data.updateCountry(dataCo).then((data) => {
       updateUi(data);
-    })
+    });
+  });
+};
 
-      
-    })
-    
-
-}
-
-selectBox.addEventListener('change',(e)=>{
- 
-    row.innerHTML="";
-  const region = e.target.value
+selectBox.addEventListener("change", (e) => {
+  row.innerHTML = "";
+  const region = e.target.value;
 
   data.getAllCData().then((data) => {
-    const filterData=data.filter(country=>{
-      if(country.region.includes(region)){
-        return country
+    const filterData = data.filter((country) => {
+      if (country.region.includes(region)) {
+        return country;
       }
-      })
-    
-    updateHome(filterData)
-    
     });
-})
-  
 
-// let card = document.getElementsByClassName('card');
-// let arrCard = Array.from(card);
-// arrCard.forEach(card=>{
-//   card.addEventListener('click',()=>{
-//     console.log('hello')
-//   })
-// })
-
-
+    updateHome(filterData);
+  });
+});
