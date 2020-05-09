@@ -4,8 +4,22 @@ body {
   padding: 0;
   font-family: "Nunito Sans", sans-serif;
   font-weight: 300, 600, 800;
+  background-color:hsl(0, 0%, 98%);
+  color:(200, 15%, 8%);
 }
-
+.dark-body{
+  background-color:hsl(207, 26%, 17%);
+  color:hsl(0, 0%, 100%)
+}
+.dark-card{
+  background-color:hsl(209, 23%, 22%)
+}
+.hide{
+  visibility:hidden;
+}
+header p .black{
+  visibility:hidden;
+}
 .nav-bar {
   display: flex;
   justify-content: space-between;
@@ -38,7 +52,31 @@ img {
 }
 .bold-text {
   font-weight: bolder;
+  
 }
 .input-box,.select-box{
   box-shadow: 0px 1px 9px gray;
+}
+
+
+.card{
+  display:flex;
+  flex-wrap: wrap;
+  height:350px;
+  margin:5px;
+  box-shadow: 0px 1px 9px gray;
+}
+.card-text{
+margin-left:10px;
+}
+.input-search{
+  width:200px;
+  height:50px;
+  font-weight:bolder
+  
+}
+.select-box{
+  width:100px;
+  height:30px;
+  font-weight:bolder;
 }

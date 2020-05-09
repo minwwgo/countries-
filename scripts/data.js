@@ -31,6 +31,7 @@ class CountryData {
     const query = `${region}`;
     const response = await fetch(this.regionURL + query);
     const data = await response.json();
+    console.log(data)
     
     return data[0];
 
@@ -43,5 +44,4 @@ class CountryData {
     return data.name
   }
 }
-//  const data = new CountryData()
-//    data.getAllCData()
+ 

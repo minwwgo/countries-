@@ -4,7 +4,8 @@ const data = new CountryData();
 const display = document.querySelector(".display");
 const row = document.createElement("div");
 row.classList.add("row");
-const selectBox = document.querySelector("select-box");
+const selectBox = document.querySelector(".select-box");
+
 
 const updateUi = (data) => {
   const { countryDetail } = data;
@@ -74,31 +75,64 @@ form.addEventListener("submit", (e) => {
 });
 
 data.getAllCData().then((data) => {
-  data
-    .forEach((country) => {
-      updatehomepage(country);
-    })
-    .catch((err) => console.log(err));
-});
-const updatehomepage = (country) => {
+  updateHome(data)
+  
+  });
+const updateHome = (countries) => {
+  countries.map(country=>{
+   displayCountry(country)
+  })
+};
+const displayCountry=(country)=>{
   const home = document.createElement("div");
-  let classToAdd = ["col-12", "sm-col-12", "md-col-12", "lg-col-3", "card"];
+  let classToAdd = ["col-12", "sm-col-12", "md-col-12", "lg-col-3"];
   home.classList.add(...classToAdd);
   const imgSrc = `${country.flag}`;
   home.innerHTML = `
+    <div class="card">
+    <div class='card-flag'>
     <img src=${imgSrc}>
+    </div>
+    
+    <div class ="card-text">
+    <p class="bold-text"><span class="bold-text"> ${country.name}</span><p>
     <p><span class="bold-text">Population: </span>${country.population} </p>
     <p><span class="bold-text">Region: </span>${country.region}</p>
     <p><span class="bold-text">Capital: </span>${country.capital}</p>
+    </div>
+    </div>
+    
     `;
-  display.append(row);
-  row.append(home);
-};
+    display.append(row);
+    row.appendChild(home);
 
-data.getRegion().then((data) => {
-  data.forEach((region) => {
-    const option = document.createElement("option");
-    option.innerHTML = `${region}`;
-    selectBox.append(option);
-  });
-});
+}
+
+selectBox.addEventListener('change',(e)=>{
+ 
+    row.innerHTML="";
+  const region = e.target.value
+
+  data.getAllCData().then((data) => {
+    const filterData=data.filter(country=>{
+      if(country.region.includes(region)){
+        return country
+      }
+      })
+    
+    updateHome(filterData)
+    
+    });
+})
+  
+const change = document.querySelector('.change-body')
+  change.addEventListener('click',()=>{
+   document.body.classList.toggle('dark-body')
+   document.querySelector('.header').classList.toggle('dark-body')
+   document.querySelector('.header h2').classList.toggle('dark-body')
+   document.querySelector('.header p').classList.toggle('dark-body')
+   document.querySelector('').classList.toggle('hide')
+
+})
+
+
