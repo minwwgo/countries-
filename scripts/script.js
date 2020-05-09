@@ -95,8 +95,11 @@ const updateHome = (countries) => {
 };
 const displayCountry=(country)=>{
   const home = document.createElement("div");
-  let classToAdd = ["col-12", "sm-col-12", "md-col-12", "lg-col-3",'xl-col-3'];
+  let classToAdd = ["col-12", "sm-col-12", "md-col-12", "lg-col-3",'xl-col-3','home'];
   home.classList.add(...classToAdd);
+  
+  
+  
   const imgSrc = `${country.flag}`;
   home.innerHTML = `
     <div class="card">
@@ -115,6 +118,19 @@ const displayCountry=(country)=>{
     `;
     display.append(row);
     row.appendChild(home);
+    home.addEventListener('click', ()=>{
+      console.log(country.name)
+      const dataCo = country.name.toLowerCase()
+      console.log(dataCo)
+      data
+    .updateCountry(dataCo)
+    .then((data) => {
+      updateUi(data);
+    })
+
+      
+    })
+    
 
 }
 
@@ -135,8 +151,13 @@ selectBox.addEventListener('change',(e)=>{
     });
 })
   
-console.log('min')
-console.log(document.querySelector('.card'))
 
+// let card = document.getElementsByClassName('card');
+// let arrCard = Array.from(card);
+// arrCard.forEach(card=>{
+//   card.addEventListener('click',()=>{
+//     console.log('hello')
+//   })
+// })
 
 
