@@ -5,9 +5,12 @@ class CountryData {
     this.regionURL = "https://restcountries.eu/rest/v2/regionalbloc/";
     this.codeURL ="https://restcountries.eu/rest/v2/alpha/"
   }
+  // 
   async updateCountry(country) {
+    //async function to get country
     const countryDetail = await this.getCountry(country);
-
+// return object value and object key same 
+// object shorthand notation 
     return { countryDetail };
   }
   async updateCountryName(code){

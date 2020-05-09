@@ -7,12 +7,13 @@ row.classList.add("row");
 const selectBox = document.querySelector(".select-box");
 
 const change = document.querySelector(".change-body");
+// dark mode background and element add class with toggle 
 change.addEventListener("click", () => {
   document.body.classList.toggle("dark-body");
   document.querySelector(".header").classList.toggle("dark-body");
   document.querySelector(".header h2").classList.toggle("dark-body");
   document.querySelector(".header p").classList.toggle("dark-body");
-  // /document.querySelector("").classList.toggle("hide");
+  // p span change text to light mode and dark mode 
   const para = document.querySelector('.header p .mode-change')
   if(para.innerHTML.includes('Dark')){
     para.innerText= "Light Mode"
@@ -21,10 +22,16 @@ change.addEventListener("click", () => {
   }
   
 });
-
+// took data /update browser
 const updateUi = (data) => {
-  const { countryDetail } = data;
+  console.log(data)
+  // destructure properties 
+  // in our case countryDetails is constant  we got data.countryDetails  
+  //constant must be same name as getting from object .
+  // it's mean i want to store data.countryDeatil properties in constant call countryDetail.
+  const  {countryDetail}  = data;
 
+// update detail template 
   const imgSrc = `${countryDetail.flag}`;
 
   display.innerHTML = `
@@ -76,15 +83,24 @@ const updateUi = (data) => {
 
 `;
 };
-
+// add addeventListener to form 
 form.addEventListener("submit", (e) => {
+  // prevent default action
   e.preventDefault();
-  const country = form.input.value.trim();
-  form.reset();
+  document.querySelector(".container button").classList.toggle("show");
 
+  // get country value 
+  const country = form.input.value.trim();
+  // clear the form after entry 
+  form.reset();
+// update the ui with new country 
+// make request /get data back 
   data
     .updateCountry(country)
+    
     .then((data) => {
+      //pass data to update function
+      //this function will update data to Dom 
       updateUi(data);
     })
 
