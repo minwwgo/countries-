@@ -106,16 +106,21 @@ form.addEventListener("submit", (e) => {
 
     .catch((err) => console.log(err));
 });
-
+//get all data 
 data.getAllCData().then((data) => {
+  //pass to function 
   updateHome(data);
 });
+//accept array list countries change to one country 
 const updateHome = (countries) => {
   countries.map((country) => {
+    // pass to update ui function 
     displayCountry(country);
   });
 };
+//update data on Dom 
 const displayCountry = (country) => {
+  //create element 
   const home = document.createElement("div");
   let classToAdd = [
     "col-12",
@@ -125,9 +130,11 @@ const displayCountry = (country) => {
     "xl-col-3",
     "home",
   ];
+  // set multiple class to element 
   home.classList.add(...classToAdd);
 
   const imgSrc = `${country.flag}`;
+  // update on DOM
   home.innerHTML = `
     <div class="card">
     <div class='card-flag'>
@@ -143,43 +150,54 @@ const displayCountry = (country) => {
     </div>
     
     `;
+    // add child element 
   display.append(row);
+  // add child element 
   row.appendChild(home);
+  // addeventlistener  on card  / each time can click /take to relate page for more detail
   home.addEventListener("click", () => {
+    // show home page button 
     document.querySelector(".container button").classList.toggle("show");
-    
+    // when click on card / return value
     const dataCo = country.name.toLowerCase();
-    
+    // return value pass to function and fetch / promise return 
     data.updateCountry(dataCo).then((data) => {
+      // pass data to update function which will update on DOM
       updateUi(data);
     });
   });
 };
-
+// add eventlistener on selectBox
 selectBox.addEventListener("change", (e) => {
+  // empty DOM
   row.innerHTML = "";
+  // assign event value to variable 
   const region = e.target.value;
-
+// pass data and fetch / return promises 
   data.getAllCData().then((data) => {
+    // return as array / filter out array with event return value 
     const filterData = data.filter((country) => {
+      //filter out array list to  element list with condition 
       if (country.region.includes(region)) {
+        // return filter list 
         return country;
       }
     });
-
+//passed to update UI function which will update data on DOM
     updateHome(filterData);
   });
 });
+// create button which will take back to home 
 const homeBtn= document.querySelector('.btn .btn-home')
-
+// add event listener on button 
 homeBtn.addEventListener('click',()=>{
-  
+  // set show class  button after event click 
   document.querySelector(".container button").classList.toggle("show");
-
+// clean out DOM 
   display.innerHTML = "";
-
+// get fetch data / return promises 
   data.getAllCData().then((data) => {
-
+// passed to update function. 
     updateHome(data);
   });
   

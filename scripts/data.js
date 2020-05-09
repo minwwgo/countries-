@@ -17,12 +17,15 @@ class CountryData {
     const countryName = await this.getCountryname(code)
     return {countryName}
   }
+  // get all data fetch 
   async getAllCData() {
+
     const response = await fetch(this.allCountryData);
     const data = await response.json();
     
     return data;
   }
+  // pass country name and fetch 
   async getCountry(country) {
     const query = `${country}`;
     const response = await fetch(this.countryURL + query);
@@ -30,15 +33,8 @@ class CountryData {
     
     return data[0];
   }
-  async getRegion(region) {
-    const query = `${region}`;
-    const response = await fetch(this.regionURL + query);
-    const data = await response.json();
-    console.log(data)
-    
-    return data[0];
 
-  }
+  
   async getCountryname(code){
     const query = `${code}`
     const response = await fetch(this.codeURL +query)
