@@ -131,9 +131,9 @@ const displayCountry = (country) => {
   row.appendChild(home);
   home.addEventListener("click", () => {
     document.querySelector(".container button").classList.toggle("show");
-    console.log(country.name);
+    
     const dataCo = country.name.toLowerCase();
-    console.log(dataCo);
+    
     data.updateCountry(dataCo).then((data) => {
       updateUi(data);
     });
@@ -154,3 +154,17 @@ selectBox.addEventListener("change", (e) => {
     updateHome(filterData);
   });
 });
+const homeBtn= document.querySelector('.btn .btn-home')
+
+homeBtn.addEventListener('click',()=>{
+  
+  document.querySelector(".container button").classList.toggle("show");
+
+  display.innerHTML = "";
+
+  data.getAllCData().then((data) => {
+
+    updateHome(data);
+  });
+  
+})

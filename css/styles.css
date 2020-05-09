@@ -82,11 +82,14 @@ margin-left:10px;
   margin:20px;
   width:100px;
   height: 40px;
+  box-shadow: 0px 1px 9px gray;
+  font-weight: bolder;
+  font-size: 16px;
   
 }
 .show{
   visibility:visible;
 }
- .hide{
-  visibility:hidden;
-} 
+.hide{
+  visibility: hidden;
+}
