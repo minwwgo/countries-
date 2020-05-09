@@ -14,9 +14,7 @@ body {
 .dark-card{
   background-color:hsl(209, 23%, 22%)
 }
-.hide{
-  visibility:hidden;
-}
+
 header p .black{
   visibility:hidden;
 }
@@ -80,8 +78,15 @@ margin-left:10px;
   height:30px;
   font-weight:bolder;
 }
-.btn-home{
-  margin:10px;
-  width:50px;
+.btn .btn-home{
+  margin:20px;
+  width:100px;
   height: 40px;
+  
 }
+.show{
+  visibility:visible;
+}
+ .hide{
+  visibility:hidden;
+} 

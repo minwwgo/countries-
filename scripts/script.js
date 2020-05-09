@@ -130,6 +130,7 @@ const displayCountry = (country) => {
   display.append(row);
   row.appendChild(home);
   home.addEventListener("click", () => {
+    document.querySelector(".container button").classList.toggle("show");
     console.log(country.name);
     const dataCo = country.name.toLowerCase();
     console.log(dataCo);
