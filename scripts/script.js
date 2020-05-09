@@ -6,6 +6,16 @@ const row = document.createElement("div");
 row.classList.add("row");
 const selectBox = document.querySelector(".select-box");
 
+const change = document.querySelector('.change-body')
+  change.addEventListener('click',()=>{
+   document.body.classList.toggle('dark-body')
+   document.querySelector('.header').classList.toggle('dark-body')
+   document.querySelector('.header h2').classList.toggle('dark-body')
+   document.querySelector('.header p').classList.toggle('dark-body')
+   document.querySelector('').classList.toggle('hide')
+
+})
+
 
 const updateUi = (data) => {
   const { countryDetail } = data;
@@ -85,7 +95,7 @@ const updateHome = (countries) => {
 };
 const displayCountry=(country)=>{
   const home = document.createElement("div");
-  let classToAdd = ["col-12", "sm-col-12", "md-col-12", "lg-col-3"];
+  let classToAdd = ["col-12", "sm-col-12", "md-col-12", "lg-col-3",'xl-col-3'];
   home.classList.add(...classToAdd);
   const imgSrc = `${country.flag}`;
   home.innerHTML = `
@@ -125,14 +135,8 @@ selectBox.addEventListener('change',(e)=>{
     });
 })
   
-const change = document.querySelector('.change-body')
-  change.addEventListener('click',()=>{
-   document.body.classList.toggle('dark-body')
-   document.querySelector('.header').classList.toggle('dark-body')
-   document.querySelector('.header h2').classList.toggle('dark-body')
-   document.querySelector('.header p').classList.toggle('dark-body')
-   document.querySelector('').classList.toggle('hide')
+console.log('min')
+console.log(document.querySelector('.card'))
 
-})
 
 
