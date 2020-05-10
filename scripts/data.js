@@ -39,7 +39,7 @@ class CountryData {
     const query = `${code}`
     const response = await fetch(this.codeURL +query)
     const data = await response .json();
-    console.log(data.name)
+    
     return data.name
   }
 }
