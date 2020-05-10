@@ -29,26 +29,25 @@ const updateUi = (upData) => {
   // it's mean i want to store data.countryDeatil properties in constant call countryDetail.
   const { countryDetail } = upData;
   const arrData = countryDetail.borders;
-  // console.log(cData)
-  // function getborder() {
-  //   arrData.map((borders) => {
-  //     data.getCountryname(borders).then((data) => showResult(data));
-  //   });
-  // }
-  // const showResult = (result) => {
-  //   console.log(result) 
-  // };
-  // getborder()
-  
-  
-  
-  
+  const newArr = arrData.slice(0, 3);
+  console.log(newArr);
+  let countries = "";
 
+  function getborder() {
+    newArr.map((borders) => {
+      data.getCountryname(borders).then((data) => showResult(data));
+    });
+  }
+  const showResult = (result) => {
+    countries = countries + result + " ";
+    console.log(countries);
+    document.getElementById("border").innerHTML = countries;
+  };
+  getborder();
   // update detail template
   const imgSrc = `${countryDetail.flag}`;
 
   display.innerHTML = `
-  
   <div class="row">
   <div class='b-card'>
   <div class="row">
@@ -84,7 +83,7 @@ const updateUi = (upData) => {
           )} </P>
         </div>
         <div class='col-12 lg-col-12 content-three'>
-         <p><span class='bold-text'>Border Countries: </span>${arrData}</p>
+         <article><span class='bold-text'>Border Countries: </span><p id='border'></p></article>
           </div>
         </div>
       </div>
@@ -94,6 +93,7 @@ const updateUi = (upData) => {
 
 `;
 };
+
 // add addeventListener to form
 form.addEventListener("submit", (e) => {
   // prevent default action
@@ -114,7 +114,6 @@ form.addEventListener("submit", (e) => {
       //this function will update data to Dom
       updateUi(data);
     })
-
     .catch((err) => console.log(err));
 });
 //get all data
