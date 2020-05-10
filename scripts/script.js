@@ -180,7 +180,7 @@ const displayCountry = (country) => {
 // add eventlistener on selectBox
 selectBox.addEventListener("change", (e) => {
   // empty DOM
-  row.innerHTML = "";
+  display.innerHTML = "";
   // assign event value to variable
   const region = e.target.value;
   // pass data and fetch / return promises
