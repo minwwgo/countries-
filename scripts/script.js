@@ -22,6 +22,7 @@ change.addEventListener("click", () => {
   }
 });
 // took data /update browser
+
 const updateUi = (upData) => {
   // destructure properties
   // in our case countryDetails is constant  we got data.countryDetails
@@ -30,20 +31,26 @@ const updateUi = (upData) => {
   const { countryDetail } = upData;
   const arrData = countryDetail.borders;
   const newArr = arrData.slice(0, 3);
-  console.log(newArr);
-  let countries = "";
-
-  function getborder() {
-    newArr.map((borders) => {
-      data.getCountryname(borders).then((data) => showResult(data));
-    });
-  }
+  newArr.map((borders) => {
+    data.getCountryname(borders).then((data) => showResult(data));
+  });
+  let countries = [];
   const showResult = (result) => {
-    countries = countries + result + " ";
-    console.log(countries);
-    document.getElementById("border").innerHTML = countries;
+    // console.log(result, "");
+    countries.push(result);
+    // Object.assign(countries,result)
+    // console.log(countries)
+    let showB = "";
+    countries.map((country) => {
+      console.log(country);
+
+      showB += ` <button class="border-country" onClick=${alert(
+        "hello"
+      )}> ${country}</button> `;
+    });
+
+    document.getElementById("border").innerHTML = showB;
   };
-  getborder();
   // update detail template
   const imgSrc = `${countryDetail.flag}`;
 
