@@ -1,0 +1,45 @@
+<div class="row">
+  <div class='b-card'>
+  <div class="row">
+    <div class='lg-col-6 image'>
+      <img src=${imgSrc} alt="">
+    </div>
+
+    <div class="col-12 lg-col-6 details">
+      <div class="row">
+        <div class='col-12 lg-col-6 content-one'>
+          <h3> ${countryDetail.name}</h3>
+        </div>
+        <div class='col-12 lg-col-6 content-two'>
+          <P><span class='bold-text'>Native Name: </span>${
+            countryDetail.nativeName
+          }</P>
+          <P><span class='bold-text'>Population: </span>${
+            countryDetail.population
+          }</P>
+          <P><span class='bold-text'>Region: </span>${countryDetail.region}</P>
+          <P><span class='bold-text'>Sub Region: </span>${
+            countryDetail.subregion
+          }</P>
+          <P><span class='bold-text'>Capital: </span>${
+            countryDetail.capital
+          }</P>
+          <P><span class='bold-text'>Top Level Domain: </span>${
+            countryDetail.topLevelDomain
+          }</P>
+          <P><span class='bold-text'>Currencies: </span>${countryDetail.currencies.map(
+            (currency) => currency.code
+          )}</P>
+          <P><span class='bold-text'>Languages:</span>${countryDetail.languages.map(
+            (language) => language.name
+          )} </P>
+        </div>
+        
+        <div class='col-12 lg-col-12 content-three'>
+         <article><span class='bold-text'>Border Countries: </span><p id='border'></p></article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

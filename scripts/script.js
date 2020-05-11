@@ -30,74 +30,91 @@ const updateUi = (upData) => {
   // it's mean i want to store data.countryDeatil properties in constant call countryDetail.
   const { countryDetail } = upData;
   const arrData = countryDetail.borders;
+
   const newArr = arrData.slice(0, 3);
   newArr.map((borders) => {
-    data.getCountryname(borders).then((data) => showResult(data));
-  });
-  let countries = [];
-  const showResult = (result) => {
-    // console.log(result, "");
-    countries.push(result);
-    // Object.assign(countries,result)
-    // console.log(countries)
-    let showB = "";
-    countries.map((country) => {
-      console.log(country);
-
-      showB += ` <button class="border-country" onClick=${alert(
-        "hello"
-      )}> ${country}</button> `;
+    data.getCountryname(borders).then((data) => {
+      showResult(data);
     });
+  });
 
+  let showB = "";
+
+  const showResult = (result) => {
+    //console.log(result, " line 46");
+
+    showB += ` <button class="border-country"> ${result}</button> `;
     document.getElementById("border").innerHTML = showB;
+    document.querySelector(".border-country").addEventListener("click", () => {
+      console.log("hello");
+    });
   };
   // update detail template
   const imgSrc = `${countryDetail.flag}`;
 
   display.innerHTML = `
-  <div class="row">
-  <div class='b-card'>
-  <div class="row">
-    <div class='lg-col-6 image'>
-      <img src=${imgSrc} alt="">
-    </div>
-
-    <div class="col-12 lg-col-6 details">
-      <div class="row">
-        <div class='col-12 lg-col-6 content-one'>
-          <h3> ${countryDetail.name}</h3>
-          <P><span class='bold-text'>Native Name: </span>${
-            countryDetail.nativeName
-          }</P>
-          <P><span class='bold-text'>Population: </span>${
-            countryDetail.population
-          }</P>
-          <P><span class='bold-text'>Region: </span>${countryDetail.region}</P>
-          <P><span class='bold-text'>Sub Region: </span>${
-            countryDetail.subregion
-          }</P>
-          <P><span class='bold-text'>Capital: </span>${
-            countryDetail.capital
-          }</P>
-          <P><span class='bold-text'>Top Level Domain: </span>${
-            countryDetail.topLevelDomain
-          }</P>
-          <P><span class='bold-text'>Currencies: </span>${countryDetail.currencies.map(
-            (currency) => currency.code
-          )}</P>
-          <P><span class='bold-text'>Languages:</span>${countryDetail.languages.map(
-            (language) => language.name
-          )} </P>
+  <div class="row  b-card">
+          <div class='lg-col-6 image'>
+              <img src=${imgSrc} alt="">
+            </div>
+        
+            <div class="col-12 lg-col-6 ">
+              <div class="row">
+                <div class='col-12 lg-col-12 '>
+                  <h3> ${countryDetail.name}</h3>
+                </div>
+            
+                <div class="row ">
+                  
+                  <div class='col-12 lg-col-6'>
+                    
+                    <p><span class='bold-text'>Native Name: </span>
+                      ${countryDetail.nativeName}
+                    </p>
+                    <p><span class='bold-text'>Population: </span>
+                      ${countryDetail.population}
+                    </p>
+                    <p><span class='bold-text'>Region: </span>${
+                      countryDetail.region
+                    }</p>
+                    <p><span class='bold-text'>Sub Region: </span>
+                      ${countryDetail.subregion}
+                    </p>
+                    <p><span class='bold-text'>Capital: </span>
+                      ${countryDetail.capital}
+                    </p>
+                  </div>
+                  <div class='col-12 lg-col-6'>
+                    
+                    <p><span class='bold-text'>Top Level Domain: </span>
+                      ${countryDetail.topLevelDomain}
+                    </p>
+                    <p><span class='bold-text'>Currencies: </span>${countryDetail.currencies.map(
+                      (currency) => currency.code
+                    )}
+                      
+                    </p>
+                    <p><span class='bold-text'>Languages:</span>${countryDetail.languages.map(
+                      (language) => language.name
+                    )} 
+                      
+                    </p>
+                  </div>
+                    
+                  </div>
+                </div>
+                
+                
+                <div class='col-12 lg-col-12 content-three'>
+                 <article><span class='bold-text'>Border Countries: </span><p id='border'> country </p></article>
+                  </div>
+                </div>
+              </div>
+            
+        
         </div>
-        <div class='col-12 lg-col-12 content-three'>
-         <article><span class='bold-text'>Border Countries: </span><p id='border'></p></article>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
+        
+  
 `;
 };
 
@@ -173,6 +190,7 @@ const displayCountry = (country) => {
   row.appendChild(home);
   // addeventlistener  on card  / each time can click /take to relate page for more detail
   home.addEventListener("click", () => {
+    document.querySelector(".search-title-bar").classList.add("hide");
     // show home page button
     document.querySelector(".container button").classList.toggle("show");
     // when click on card / return value

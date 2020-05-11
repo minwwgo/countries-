@@ -93,12 +93,22 @@ margin-left:10px;
 .hide{
   visibility: hidden;
 }
-.content-one{
-  margin-left: 10px;
-}
+
 .b-country{
   border: 1px solid black;
   box-shadow: 0px 1px 9px gray;
   
 
+}
+.red{
+  background-color: red;
+}
+.blue{
+  background-color: blue;
+}
+.green{
+  background-color: green;
+}
+.yellow{
+  background-color: yellow;
 }

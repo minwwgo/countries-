@@ -17,6 +17,7 @@ class CountryData {
     const countryName = await this.getCountryname(code)
     return {countryName}
   }
+  
   // get all data fetch 
   async getAllCData() {
 

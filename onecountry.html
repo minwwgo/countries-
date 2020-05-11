@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link
       href="https://fonts.google.com/specimen/Nunito+Sans"
       rel="stylesheet"
@@ -22,21 +22,22 @@
   </head>
 
   <body>
-    <header>
+    <header class='header'>
       <div class="container nav-bar">
         <h2>Where in the world?</h2>
-        <p>
+        <p class="change-body">
+          <i class="far fa-moon black"></i>
           <i class="fas fa-moon"></i>
 
-          Dark Mode
+          <span class='mode-change'>Dark Mode</span>
         </p>
       </div>
     </header>
-    <section>
+    <section class='search-title-bar'>
       <div class="container search-bar">
         <div class="row search">
           <div>
-            <form action="" class="input">
+            <form action="" class="input-box">
               <input
                 name="input"
                 class="input-search"
@@ -47,53 +48,97 @@
           </div>
 
           <div>
-            <select name="" id="">
+            <select name="" id="" class="select-box">
               <option value=""> All region</option>
+              <option value="Europe"> Europe</option>
+              <option value="Asia"> Asia</option>
+              <option value="Americas">America </option>
+              <option value="Africa"> Africa</option>
+              <option value="Oceania"> Oceania</option>
             </select>
           </div>
         </div>
+      </div>
+      <div class='container btn hide'>
+        <button class='btn-home '><i class="fas fa-arrow-left"></i> </button>
       </div>
     </section>
 
     <section>
       <div class="container display">
-        <div class="row">
-          <div class="b-card">
-            <div class="row">
-              <div class="lg-col-6 image">
-                <img src="https://via.placeholder.com/400x300" alt="" />
-              </div>
-
-              <div class="col-12 lg-col-6 details">
-                <div class="row">
-                  <div class="col-12 lg-col-6 content-one">
-                    <h3>Country Name</h3>
-                    <p><span class="bold-text">Native Name: </span></p>
-                    <p><span class="bold-text">Population: </span></p>
-                    <p><span class="bold-text">Region: </span></p>
-                    <p><span class="bold-text">Sub Region: </span></p>
-                    <p><span class="bold-text">Capital: </span></p>
-                    <p><span class="bold-text">Top Level Domain: </span></p>
-                    <p><span class="bold-text">Currencies: </span></p>
-                    <p><span class="bold-text">Languages: </span></p>
+        <div class="row red b-card">
+          <div class='lg-col-6 image'>
+              <img src=${imgSrc} alt="">
+            </div>
+        
+            <div class="col-12 lg-col-6 green">
+              <div class="row">
+                <div class='col-12 lg-col-12 blue'>
+                  <h3> ${countryDetail.name}</h3>
+                </div>
+            
+                <div class="row yellow">
+                  
+                  <div class='col-12 lg-col-6'>
+                    
+                    <P><span class='bold-text'>Native Name: </span>
+                      ${
+                        countryDetail.nativeName
+                      }
+                    </P>
+                    <P><span class='bold-text'>Population: </span>
+                      ${
+                        countryDetail.population
+                      }
+                    </P>
+                    <P><span class='bold-text'>Region: </span>${countryDetail.region}</P>
+                    <P><span class='bold-text'>Sub Region: </span>
+                      ${
+                        countryDetail.subregion
+                      }
+                    </P>
                   </div>
-                  <div class="col-12 lg-col-12 content-three">
-                    <p>
-                      <span class="bold-text">Border Countries: </span
-                      ><span class="border">Border nav3 </span
-                      ><span class="border">Border nav1 </span
-                      ><span class="border">Border nav2</span>
-                    </p>
+                  <div class='col-12 lg-col-6'>
+                    <P><span class='bold-text'>Capital: </span>
+                      ${
+                        countryDetail.capital
+                      }
+                    </P>
+                    <P><span class='bold-text'>Top Level Domain: </span>
+                      ${
+                        countryDetail.topLevelDomain
+                      }
+                    </P>
+                    <P><span class='bold-text'>Currencies: </span>${countryDetail.currencies.map(
+                      (currency) => currency.code
+                    )}
+                      
+                    </P>
+                    <P><span class='bold-text'>Languages:</span>${countryDetail.languages.map(
+                      (language) => language.name
+                    )} 
+                      
+                    </P>
+                  </div>
+                    
+                  </div>
+                </div>
+                
+                
+                <div class='col-12 lg-col-12 content-three'>
+                 <article><span class='bold-text'>Border Countries: </span><p id='border'> country </p></article>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            
+        
         </div>
+        
+        `;
       </div>
     </section>
 
-    <script src="scripts/data.js"></script>
-    <script src="scripts/script.js"></script>
+    <!-- <script src="scripts/data.js"></script>
+    <script src="scripts/script.js"></script> -->
   </body>
 </html>
