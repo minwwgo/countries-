@@ -4,7 +4,7 @@ const data = new CountryData();
 const display = document.querySelector(".display");
 const row = document.createElement("div");
 row.classList.add("row");
-const selectBox = document.querySelector(".select-box");
+const selectBox = document.getElementById("select-box");
 
 const change = document.querySelector(".change-body");
 // dark mode background and element add class with toggle
@@ -64,49 +64,50 @@ const updateUi = (upData) => {
                   <h3> ${countryDetail.name}</h3>
                 </div>
             
-                <div class="row ">
-                  
-                  <div class='col-12 lg-col-6'>
+                <div class="row">
+                
+                <div class='col-12 lg-col-6'>
                     
-                    <p><span class='bold-text'>Native Name: </span>
+                    <p><strong>Native Name: </strong>
                       ${countryDetail.nativeName}
                     </p>
-                    <p><span class='bold-text'>Population: </span>
+                    <p><strong>Population: </strong>
                       ${countryDetail.population}
                     </p>
-                    <p><span class='bold-text'>Region: </span>${
-                      countryDetail.region
-                    }</p>
-                    <p><span class='bold-text'>Sub Region: </span>
+                    <p><strong>Region: </strong>${countryDetail.region}</p>
+                    <p><strong>Sub Region: </strong>
                       ${countryDetail.subregion}
                     </p>
-                    <p><span class='bold-text'>Capital: </span>
+                    <p><strong>Capital: </strong>
                       ${countryDetail.capital}
                     </p>
                   </div>
                   <div class='col-12 lg-col-6'>
                     
-                    <p><span class='bold-text'>Top Level Domain: </span>
+                    <p><strong>Top Level Domain: </strong>
                       ${countryDetail.topLevelDomain}
                     </p>
-                    <p><span class='bold-text'>Currencies: </span>${countryDetail.currencies.map(
+                    <p><strong>Currencies: </strong>${countryDetail.currencies.map(
                       (currency) => currency.code
                     )}
                       
                     </p>
-                    <p><span class='bold-text'>Languages:</span>${countryDetail.languages.map(
+                    <p><strong>Languages:</strong>${countryDetail.languages.map(
                       (language) => language.name
                     )} 
                       
                     </p>
                   </div>
                     
-                  </div>
+                  
+                </div>
+                  
+                  
                 </div>
                 
                 
                 <div class='col-12 lg-col-12 content-three'>
-                 <article><span class='bold-text'>Border Countries: </span><p id='border'> country </p></article>
+                 <article><strong>Border Countries: </strong><p id='border'> country </p></article>
                   </div>
                 </div>
               </div>
@@ -122,6 +123,8 @@ const updateUi = (upData) => {
 form.addEventListener("submit", (e) => {
   // prevent default action
   e.preventDefault();
+  document.querySelector(".search-title-bar").classList.toggle("hide");
+
   document.querySelector(".container button").classList.toggle("show");
 
   // get country value
@@ -170,20 +173,21 @@ const displayCountry = (country) => {
   const imgSrc = `${country.flag}`;
   // update on DOM
   home.innerHTML = `
+    
     <div class="card">
-    <div class='card-flag'>
-    <img src=${imgSrc}>
+      <div class='card-flag'>
+        <img src=${imgSrc}>
+      </div>
+    
+      <div class ="card-text">
+        <h3> ${country.name}</h3>
+        <p><strong>Population: </strong>${country.population} </p>
+        <p><strong>Region: </strong>${country.region}</p>
+        <p><strong>Capital: </strong>${country.capital}</p>
+      </div>
     </div>
     
-    <div class ="card-text">
-    <p class="bold-text"><span class="bold-text"> ${country.name}</span><p>
-    <p><span class="bold-text">Population: </span>${country.population} </p>
-    <p><span class="bold-text">Region: </span>${country.region}</p>
-    <p><span class="bold-text">Capital: </span>${country.capital}</p>
-    </div>
-    </div>
-    
-    `;
+  `;
   // add child element
   display.append(row);
   // add child element
@@ -205,9 +209,10 @@ const displayCountry = (country) => {
 // add eventlistener on selectBox
 selectBox.addEventListener("change", (e) => {
   // empty DOM
-  display.innerHTML = "";
+  row.innerHTML = "";
   // assign event value to variable
   const region = e.target.value;
+
   // pass data and fetch / return promises
   data.getAllCData().then((data) => {
     // return as array / filter out array with event return value
@@ -227,8 +232,6 @@ const homeBtn = document.querySelector(".btn .btn-home");
 // add event listener on button
 homeBtn.addEventListener("click", () => {
   document.querySelector(".search-title-bar").classList.toggle("hide");
-
-
   // set show class  button after event click
   document.querySelector(".container button").classList.toggle("show");
   // clean out DOM
