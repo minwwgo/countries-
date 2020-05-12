@@ -190,7 +190,7 @@ const displayCountry = (country) => {
   row.appendChild(home);
   // addeventlistener  on card  / each time can click /take to relate page for more detail
   home.addEventListener("click", () => {
-    document.querySelector(".search-title-bar").classList.add("hide");
+    document.querySelector(".search-title-bar").classList.toggle("hide");
     // show home page button
     document.querySelector(".container button").classList.toggle("show");
     // when click on card / return value
@@ -226,6 +226,9 @@ selectBox.addEventListener("change", (e) => {
 const homeBtn = document.querySelector(".btn .btn-home");
 // add event listener on button
 homeBtn.addEventListener("click", () => {
+  document.querySelector(".search-title-bar").classList.toggle("hide");
+
+
   // set show class  button after event click
   document.querySelector(".container button").classList.toggle("show");
   // clean out DOM
