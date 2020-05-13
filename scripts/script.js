@@ -1,3 +1,6 @@
+let countryName = [];
+let countryCode = [];
+
 const input = document.querySelector(".input-search");
 const form = document.querySelector("form");
 const data = new CountryData();
@@ -13,6 +16,7 @@ change.addEventListener("click", () => {
   document.querySelector(".header").classList.toggle("dark-body");
   document.querySelector(".header h2").classList.toggle("dark-body");
   document.querySelector(".header p").classList.toggle("dark-body");
+  document.querySelector(".card").classList.toggle("dark-body");
   // p span change text to light mode and dark mode
   const para = document.querySelector(".header p .mode-change");
   if (para.innerHTML.includes("Dark")) {
@@ -29,33 +33,67 @@ const updateUi = (upData) => {
   //constant must be same name as getting from object .
   // it's mean i want to store data.countryDeatil properties in constant call countryDetail.
   const { countryDetail } = upData;
-  const arrData = countryDetail.borders;
-
-  const newArr = arrData.slice(0, 3);
-  newArr.map((borders) => {
-    data.getCountryname(borders).then((data) => {
-      showResult(data);
+  // console.log(countryDetail);
+  if (!countryDetail.borders) {
+    console.log("there is no border");
+  } else {
+    const arrData = countryDetail.borders;
+    const newArr = arrData.slice(0, 3);
+    newArr.map((borders) => {
+      data
+        .getCountryname(borders)
+        .then((data) => {
+          showResult(data);
+        })
+        .catch((err) => console.log(err));
     });
-  });
 
-  let showB = "";
+    let showB = "";
 
-  const showResult = (result) => {
-    //console.log(result, " line 46");
+    const showResult = (result) => {
+      //console.log(result, " line 46");
+      result.split(",").map((e) => {
+        // console.log(e);
+        document.getElementById(
+          "border"
+        ).innerHTML = ` <button class="border-country">${e}</button> `;
+      });
+      showB += ` <button class="border-country"> ${result}</button> `;
+      document.getElementById("border").innerHTML = showB;
 
-    showB += ` <button class="border-country"> ${result}</button> `;
-    document.getElementById("border").innerHTML = showB;
-    document.querySelector(".border-country").addEventListener("click", () => {
-      console.log("hello");
-    });
-  };
+      const allBtnBorder = document.querySelectorAll(".border-country");
+      allBtnBorder.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          // console.log(e)
+          const cName = e.target.innerText;
+          console.log(cName);
+          let start = cName.indexOf("(");
+          const newCut = cName.trim().slice(0, start);
+          console.log(newCut);
+          countryName.filter((el, i) => {
+            if (el == cName) {
+              countryCode[i];
+            }
+          });
+          data
+            .updateCountry(newCut)
+            .then((data) => {
+              // console.log(data);
+              updateUi(data);
+            })
+            .catch((err) => console.log(err));
+        });
+      });
+    };
+  }
+
   // update detail template
   const imgSrc = `${countryDetail.flag}`;
 
   display.innerHTML = `
   <div class="row  b-card">
           <div class='lg-col-6 image'>
-              <img src=${imgSrc} alt="">
+              <img class="img-card-flag" src=${imgSrc} alt="">
             </div>
         
             <div class="col-12 lg-col-6 ">
@@ -64,7 +102,7 @@ const updateUi = (upData) => {
                   <h3> ${countryDetail.name}</h3>
                 </div>
             
-                <div class="row">
+                <div class="row content-one">
                 
                 <div class='col-12 lg-col-6'>
                     
@@ -72,7 +110,9 @@ const updateUi = (upData) => {
                       ${countryDetail.nativeName}
                     </p>
                     <p><strong>Population: </strong>
-                      ${countryDetail.population}
+                      ${new Intl.NumberFormat().format(
+                        countryDetail.population
+                      )}
                     </p>
                     <p><strong>Region: </strong>${countryDetail.region}</p>
                     <p><strong>Sub Region: </strong>
@@ -139,6 +179,7 @@ form.addEventListener("submit", (e) => {
     .then((data) => {
       //pass data to update function
       //this function will update data to Dom
+
       updateUi(data);
     })
     .catch((err) => console.log(err));
@@ -162,7 +203,7 @@ const displayCountry = (country) => {
   let classToAdd = [
     "col-12",
     "sm-col-12",
-    "md-col-12",
+    "md-col-6",
     "lg-col-3",
     "xl-col-3",
     "home",
@@ -181,7 +222,9 @@ const displayCountry = (country) => {
     
       <div class ="card-text">
         <h3> ${country.name}</h3>
-        <p><strong>Population: </strong>${country.population} </p>
+        <p><strong>Population: </strong>${new Intl.NumberFormat().format(
+          country.population
+        )}</p>
         <p><strong>Region: </strong>${country.region}</p>
         <p><strong>Capital: </strong>${country.capital}</p>
       </div>
@@ -242,3 +285,32 @@ homeBtn.addEventListener("click", () => {
     updateHome(data);
   });
 });
+
+data.getAllCData().then((allCountries) => {
+  // console.log(allCountries,'line 282')
+  checkAllData(allCountries);
+});
+
+const checkAllData = (allCountries) => {
+  allCountries.map((country) => {
+    // console.log(country.name)
+    countryName.push(country.name);
+    countryCode.push(country.alpha3Code);
+  });
+};
+
+// console.log(countryName)
+//  console.log(countryCode)
+function showDD(data) {
+  console.log(data);
+}
+function matchCode(data) {
+  let newArr = countryCode;
+
+  newArr.forEach((code, i) => {
+    if (data == code) {
+      console.log(countryName);
+      showDD(countryName[i]);
+    }
+  });
+}

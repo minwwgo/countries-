@@ -13,19 +13,9 @@ class CountryData {
 // object shorthand notation 
     return { countryDetail };
   }
-  async updateCountryName(code){
-    const countryName = await this.getCountryname(code)
-    return {countryName}
-  }
   
-  // get all data fetch 
-  async getAllCData() {
-
-    const response = await fetch(this.allCountryData);
-    const data = await response.json();
-    
-    return data;
-  }
+  
+  
   // pass country name and fetch 
   async getCountry(country) {
     const query = `${country}`;
@@ -43,5 +33,38 @@ class CountryData {
     
     return data.name
   }
+  
+  // get all data fetch 
+  async getAllCData() {
+
+    const response = await fetch(this.allCountryData);
+    const data = await response.json();
+    return data;
+  }
+
+   async updateAllCountry(){
+    const allCountries = await this.getAllCData()
+    return {allCountries}
+  }
+// test
+  async getCountryCodename(code){
+    const query = `${code}`
+    const response = await fetch(this.codeURL +query)
+    const data = await response .json();
+    
+    
+    return data
+  }
+
+  async updateCountryName(code){
+    
+    const country = await this.getCountryCodename(code)
+    
+    return {country}
+  }
 }
- 
+//  test
+// const b = new CountryData()
+
+// b.updateCountryName('IND')
+
