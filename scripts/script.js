@@ -147,7 +147,7 @@ const updateUi = (upData) => {
                 
                 
                 <div class='col-12 lg-col-12 content-three'>
-                 <article><strong>Border Countries: </strong><p id='border'> country </p></article>
+                 <article><strong>Border Countries: </strong><p id='border'>  </p></article>
                   </div>
                 </div>
               </div>
