@@ -164,10 +164,8 @@ form.addEventListener("submit", (e) => {
   // prevent default action
   e.preventDefault();
   document.querySelector(".search-title-bar").classList.toggle("hide");
-
   document.querySelector(".container button").classList.toggle("show");
-
-  // get country value
+// get country value
   const country = form.input.value.trim();
   // clear the form after entry
   form.reset();
@@ -175,7 +173,6 @@ form.addEventListener("submit", (e) => {
   // make request /get data back
   data
     .updateCountry(country)
-
     .then((data) => {
       //pass data to update function
       //this function will update data to Dom
